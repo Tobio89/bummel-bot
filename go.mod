@@ -1,5 +1,6 @@
 module github.com/BruceJi7/bummel-bot
 
+// +heroku goVersion go1.17
 go 1.17
 
 require github.com/bwmarrin/discordgo v0.23.3-0.20211027235626-007bf7679048
