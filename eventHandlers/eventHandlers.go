@@ -32,6 +32,13 @@ func CreateCommands(dg *discordgo.Session) {
 	} else {
 		fmt.Println("Erase command added")
 	}
+	_, err = dg.ApplicationCommandCreate(config.AppID, config.GuildID, commands.AdminAvail)
+	if err != nil {
+		fmt.Println("Error adding admin availability command:")
+		fmt.Println(err)
+	} else {
+		fmt.Println("Availability commands added")
+	}
 	_, err = dg.ApplicationCommandCreate(config.AppID, config.GuildID, commands.HereCommand)
 	if err != nil {
 		fmt.Println("Error adding here command:")

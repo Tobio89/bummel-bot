@@ -9,13 +9,15 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-type LogPrefixes struct {
-	Error       string
-	Forcelog    string
-	EraseOne    string
-	EraseMulti  string
-	RoleAdded   string
-	RoleRemoved string
+func SendMsgToBotChannel(s *discordgo.Session, logMessage string) {
+
+	ch, err := GetChannelByName(s, config.BotShitChannel)
+
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		s.ChannelMessageSend(ch.ID, logMessage)
+	}
 }
 
 // // Get channel by name
@@ -75,7 +77,18 @@ func MemberHasRoleByName(s *discordgo.Session, mem *discordgo.Member, roleName s
 	return false, nil
 }
 
-func FetchMember(s *discordgo.Session, userDetails string) (member *discordgo.Member, err error) {
+func MemberHasRoleByID(mem *discordgo.Member, roleID string) bool {
+
+	for _, role := range mem.Roles {
+		if role == roleID {
+			return true
+		}
+	}
+
+	return false
+}
+
+func FetchMemberByID(s *discordgo.Session, userDetails string) (member *discordgo.Member, err error) {
 	guildMembers, err := s.GuildMembers(config.GuildID, "", 1000)
 
 	if err != nil {

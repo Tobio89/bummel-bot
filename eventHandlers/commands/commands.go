@@ -15,6 +15,40 @@ var EraseCommand = &discordgo.ApplicationCommand{
 	},
 }
 
+var AdminAvail = &discordgo.ApplicationCommand{
+	Name:        "force",
+	Type:        discordgo.ChatApplicationCommand,
+	Description: "Alter someone else's here or away status",
+	Options: []*discordgo.ApplicationCommandOption{
+		{
+			Name:        "here",
+			Type:        discordgo.ApplicationCommandOptionSubCommand,
+			Description: "Set someone to be here",
+			Options: []*discordgo.ApplicationCommandOption{
+				{
+					Name:        "user",
+					Type:        discordgo.ApplicationCommandOptionUser,
+					Description: "Who to modify",
+					Required:    true,
+				},
+			},
+		},
+		{
+			Name:        "away",
+			Type:        discordgo.ApplicationCommandOptionSubCommand,
+			Description: "Set someone to be away",
+			Options: []*discordgo.ApplicationCommandOption{
+				{
+					Name:        "user",
+					Type:        discordgo.ApplicationCommandOptionUser,
+					Description: "Who to modify",
+					Required:    true,
+				},
+			},
+		},
+	},
+}
+
 var HereCommand = &discordgo.ApplicationCommand{
 	Name:        "here",
 	Type:        discordgo.ChatApplicationCommand,
