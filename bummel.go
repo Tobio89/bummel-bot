@@ -23,7 +23,7 @@ func main() {
 	eventHandlers.AddEventHandlers(dg)
 
 	// Initialise slash commands
-	// eventHandlers.CreateCommands(dg)
+	eventHandlers.CreateCommands(dg)
 
 	dg.Identify.Intents = discordgo.IntentsGuildMessages | discordgo.IntentsGuildMembers | discordgo.IntentsAllWithoutPrivileged
 	err = dg.Open() // Open the websocket
