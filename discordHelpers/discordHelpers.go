@@ -103,6 +103,14 @@ func FetchMemberByID(s *discordgo.Session, userDetails string) (member *discordg
 	return guildMembers[0], errors.New("member not found")
 }
 
+func MemberNickOrName(member *discordgo.Member) string {
+
+	if member.Nick == "" {
+		return member.User.Username
+	}
+	return member.Nick
+}
+
 func IsAdmin(s *discordgo.Session, guildID string, userID string) (bool, error) {
 	return memberHasPermission(s, guildID, userID, discordgo.PermissionAdministrator)
 }

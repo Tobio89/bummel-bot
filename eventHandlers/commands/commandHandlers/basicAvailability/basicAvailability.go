@@ -37,7 +37,7 @@ func replaceRole(s *discordgo.Session, i *discordgo.InteractionCreate, member *d
 	}
 
 	// Respond
-	disc.SendMsgToBotChannel(s, (member.Nick + msg))
+	disc.SendMsgToBotChannel(s, (disc.MemberNickOrName(member) + msg))
 	err := s.InteractionRespond(i.Interaction,
 		&discordgo.InteractionResponse{
 			Type: discordgo.InteractionResponseChannelMessageWithSource,
