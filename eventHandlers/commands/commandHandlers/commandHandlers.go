@@ -6,6 +6,7 @@ import (
 	disc "github.com/BruceJi7/bummel-bot/discordHelpers"
 	"github.com/BruceJi7/bummel-bot/eventHandlers/commands/commandHandlers/basicAvailability"
 	"github.com/BruceJi7/bummel-bot/eventHandlers/commands/commandHandlers/erase"
+	"github.com/BruceJi7/bummel-bot/eventHandlers/commands/commandHandlers/scheduleAway"
 
 	"github.com/bwmarrin/discordgo"
 )
@@ -15,6 +16,9 @@ func AdminCommands(s *discordgo.Session, i *discordgo.InteractionCreate) {
 		return
 	}
 	data := i.ApplicationCommandData()
+	if data.Name != "erase" && data.Name != "force" {
+		return
+	}
 	options := data.Options
 
 	interactionID := i.Interaction.ID
@@ -72,6 +76,12 @@ func ScheduleCommands(s *discordgo.Session, i *discordgo.InteractionCreate) {
 		basicAvailability.Here(s, i, interactionMember)
 
 	case "away":
-		basicAvailability.Away(s, i, interactionMember)
+		options := data.Options
+		if len(options) == 0 {
+			basicAvailability.Away(s, i, interactionMember)
+		} else {
+			hours := int(options[0].IntValue())
+			scheduleAway.AddScheduledAway(hours, &scheduleAway.Schedule)
+		}
 	}
 }

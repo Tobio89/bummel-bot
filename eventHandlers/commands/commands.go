@@ -58,4 +58,11 @@ var AwayCommand = &discordgo.ApplicationCommand{
 	Name:        "away",
 	Type:        discordgo.ChatApplicationCommand,
 	Description: "Get the 'away' role",
+	Options: []*discordgo.ApplicationCommandOption{
+		{
+			Name:        "when",
+			Type:        discordgo.ApplicationCommandOptionInteger,
+			Description: "How much later, in hours, to set you away",
+		},
+	},
 }
